@@ -6,9 +6,8 @@ public class OrderDetail
     {
 
     }
-    public OrderDetail(int orderDetailId, int orderId, int productId, Product product, int quantity, double total)
+    public OrderDetail(int orderId, int productId, Product product, int quantity, double total)
     {
-        OrderDetailId = orderDetailId;
         OrderId = orderId;
         ProductId = productId;
         Product = product;
@@ -16,7 +15,6 @@ public class OrderDetail
         Total = total;
     }
 #pragma warning disable CS8618
-    public int OrderDetailId { get; set; }
     public int OrderId { get; set; }
     public int ProductId { get; set; }
     public Product Product { get; set; }

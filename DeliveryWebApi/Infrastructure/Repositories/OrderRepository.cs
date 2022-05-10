@@ -19,7 +19,7 @@ public class OrderRepository : BaseRepository
         foreach(OrderDetailViewModel detail in order.Details)
         {
             var product = _context.Products.First(p => p.ProductId == detail.ProductId);
-            OrderDetail newDetail = new(detail.OrderDetailId, order.OrderId, detail.ProductId, product, detail.Quantity, detail.Total);
+            OrderDetail newDetail = new(order.OrderId, detail.ProductId, product, detail.Quantity, detail.Total);
             newOrder.Details.Add(newDetail);
 
             _context.OrderDetails.Attach(newDetail);

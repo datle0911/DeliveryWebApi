@@ -8,7 +8,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     {
         builder.HasKey(u => u.UserId);
         builder.Property(u => u.UserId)
-            .ValueGeneratedNever();
+            .ValueGeneratedOnAdd();
 
         builder.Property(u => u.UserName).HasMaxLength(12);
         builder.Property(u => u.Password).HasMaxLength(12);

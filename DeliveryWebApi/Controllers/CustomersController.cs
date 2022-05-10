@@ -11,17 +11,21 @@ public class CustomersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(Customer customer)
+    public async Task<IActionResult> PostAsync(CustomerViewModel customer)
     {
-        await _customerService.AddAsync(customer);
+        var resource = new Customer(customer.CustomerUserName, customer.CustomerPassword, customer.CustomerFullName, customer.CustomerPhoneNumber, customer.CustomerEmail);
+
+        await _customerService.AddAsync(resource);
 
         return Ok();
     }
 
     [HttpPut]
-    public async Task<IActionResult> PutAsync(Customer customer)
+    public async Task<IActionResult> PutAsync(CustomerViewModel customer)
     {
-        await _customerService.UpdateAsync(customer);
+        var resource = new Customer(customer.CustomerUserName, customer.CustomerPassword, customer.CustomerFullName, customer.CustomerPhoneNumber, customer.CustomerEmail);
+
+        await _customerService.UpdateAsync(resource);
 
         return Ok();
     }

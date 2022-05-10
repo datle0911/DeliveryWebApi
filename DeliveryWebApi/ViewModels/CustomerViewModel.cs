@@ -1,8 +1,12 @@
-﻿namespace DeliveryWebApi.Models;
+﻿namespace DeliveryWebApi.ViewModels;
 
-public class Customer
+public class CustomerViewModel
 {
-    public Customer(string customerUserName, string customerPassword, string customerFullName, string customerPhoneNumber, string customerEmail)
+    public CustomerViewModel()
+    {
+
+    }
+    public CustomerViewModel(string customerUserName, string customerPassword, string customerFullName, string customerPhoneNumber, string customerEmail)
     {
         CustomerUserName = customerUserName;
         CustomerPassword = customerPassword;
@@ -10,16 +14,10 @@ public class Customer
         CustomerPhoneNumber = customerPhoneNumber;
         CustomerEmail = customerEmail;
     }
-    public Customer()
-    {
 
-    }
-#pragma warning disable CS8618
-    public int CustomerId { get; set; }
     public string CustomerUserName { get; set; }
     public string CustomerPassword { get; set; }
     public string CustomerFullName { get; set; }
     public string CustomerPhoneNumber { get; set; }
     public string CustomerEmail { get; set; }
-#pragma warning restore CS8618
 }

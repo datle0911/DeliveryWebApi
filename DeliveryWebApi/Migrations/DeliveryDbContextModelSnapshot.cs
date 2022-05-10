@@ -25,7 +25,10 @@ namespace DeliveryWebApi.Migrations
             modelBuilder.Entity("DeliveryWebApi.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"), 1L, 1);
 
                     b.Property<string>("CustomerEmail")
                         .IsRequired()
@@ -101,9 +104,6 @@ namespace DeliveryWebApi.Migrations
 
             modelBuilder.Entity("DeliveryWebApi.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("OrderDetailId")
-                        .HasColumnType("int");
-
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -116,9 +116,7 @@ namespace DeliveryWebApi.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
-                    b.HasKey("OrderDetailId");
-
-                    b.HasIndex("OrderId");
+                    b.HasKey("OrderId", "ProductId");
 
                     b.HasIndex("ProductId");
 
@@ -128,7 +126,10 @@ namespace DeliveryWebApi.Migrations
             modelBuilder.Entity("DeliveryWebApi.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -158,7 +159,10 @@ namespace DeliveryWebApi.Migrations
             modelBuilder.Entity("DeliveryWebApi.Models.User", b =>
                 {
                     b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
                     b.Property<string>("FullName")
                         .IsRequired()

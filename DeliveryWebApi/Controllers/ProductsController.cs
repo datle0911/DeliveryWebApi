@@ -11,9 +11,11 @@ public class ProductsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(Product product)
+    public async Task<IActionResult> PostAsync(ProductViewModel product)
     {
-        await _productService.AddAsync(product);
+        var resource = new Product(product.ProductName, product.Description, product.ProductImage, product.ProductPrice, product.ProductStatus);
+
+        await _productService.AddAsync(resource);
 
         return Ok();
     }

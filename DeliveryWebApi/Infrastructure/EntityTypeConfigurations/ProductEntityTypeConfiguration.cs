@@ -8,7 +8,7 @@ public class ProductEntityTypeConfiguration : IEntityTypeConfiguration<Product>
     {
         builder.HasKey(p => p.ProductId);
         builder.Property(p => p.ProductId)
-            .ValueGeneratedNever();
+            .ValueGeneratedOnAdd();
 
         builder.Property(p => p.ProductName).HasMaxLength(50);
         builder.Property(p => p.Description).HasMaxLength(50);

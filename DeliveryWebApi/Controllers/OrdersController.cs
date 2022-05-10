@@ -23,6 +23,8 @@ public class OrdersController : Controller
     [HttpPut]
     public async Task<IActionResult> PutAsync(Order order)
     {
+        //var resource = new Order(order.CustomerId, order.Details, order.OrderDate, order.OrderAddress, order.OrderQrCode, order.OrderRobot, order.TotalPrice, order.OrderStatus, order.OrderTracking);
+
         await _orderService.UpdateAsync(order);
 
         return Ok();

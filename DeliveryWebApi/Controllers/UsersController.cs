@@ -12,9 +12,11 @@ public class UsersController : Controller
 
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(User user)
+    public async Task<IActionResult> PostAsync(UserViewModel user)
     {
-        await _userService.AddAsync(user);
+        var resource = new User(user.UserName, user.Password, user.FullName, user.PhoneNumber, user.Roles);
+
+        await _userService.AddAsync(resource);
 
         return Ok();
     }

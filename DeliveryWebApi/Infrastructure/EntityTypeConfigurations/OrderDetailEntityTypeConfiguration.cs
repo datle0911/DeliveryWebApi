@@ -6,11 +6,9 @@ public class OrderDetailEntityTypeConfiguration : IEntityTypeConfiguration<Order
 {
     public void Configure(EntityTypeBuilder<OrderDetail> builder)
     {
-        builder.HasKey(od => od.OrderDetailId);
-        builder.Property(od => od.OrderDetailId)
-            .ValueGeneratedNever();
+        builder.HasKey(od => new { od.OrderId, od.ProductId });
         builder.Property(od => od.OrderId)
-            .ValueGeneratedNever();
+            .IsRequired();
 
         builder.HasOne(od => od.Product).WithMany().HasForeignKey(od => od.ProductId);
 
