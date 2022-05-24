@@ -5,35 +5,37 @@
 public class UsersController : Controller
 {
     private readonly UserService _userService;
-    public UsersController(UserService userService)
+    private readonly IMapper _mapper;
+    public UsersController(UserService userService, IMapper mapper)
     {
         _userService = userService;
+        _mapper = mapper;
     }
 
 
     [HttpPost]
     public async Task<IActionResult> PostAsync(UserViewModel user)
     {
-        var resource = new User(user.UserName, user.Password, user.FullName, user.PhoneNumber, user.Roles);
-
+        var resource = _mapper.Map<UserViewModel, User>(user);
         await _userService.AddAsync(resource);
 
         return Ok();
     }
 
     [HttpPut]
-    public async Task<IActionResult> PutAsync(User user)
+    public async Task<IActionResult> PutAsync(UserViewModel user)
     {
-        await _userService.UpdateAsync(user);
+        var resource = _mapper.Map<UserViewModel, User>(user);
+        await _userService.UpdateAsync(resource);
 
         return Ok();
     }
 
     [HttpGet("{name}")]
-    public async Task<IEnumerable<User>> GetByName(string name)
+    public async Task<IEnumerable<UserViewModel>> GetByName(string name)
     {
         var users = await _userService.GetByName(name);
 
-        return users;
+        return _mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(users);
     }
 }

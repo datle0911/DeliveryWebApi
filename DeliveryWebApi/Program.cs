@@ -34,7 +34,7 @@ builder.Services.AddTransient<CustomerService>();
 builder.Services.AddTransient<ProductService>();
 builder.Services.AddTransient<OrderService>();
 builder.Services.AddTransient<UserService>();
-
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

@@ -5,34 +5,36 @@
 public class ProductsController : Controller
 {
     private readonly ProductService _productService;
-    public ProductsController(ProductService productService)
+    private readonly IMapper _mapper;
+    public ProductsController(ProductService productService, IMapper mapper)
     {
         _productService = productService;
+        _mapper = mapper;
     }
 
     [HttpPost]
     public async Task<IActionResult> PostAsync(ProductViewModel product)
     {
-        var resource = new Product(product.ProductName, product.Description, product.ProductImage, product.ProductPrice, product.ProductStatus);
-
+        var resource = _mapper.Map<ProductViewModel, Product>(product);
         await _productService.AddAsync(resource);
 
         return Ok();
     }
 
     [HttpPut]
-    public async Task<IActionResult> PutAsync(Product product)
+    public async Task<IActionResult> PutAsync(ProductViewModel product)
     {
-        await _productService.UpdateAsync(product);
+        var resource = _mapper.Map<ProductViewModel, Product>(product);
+        await _productService.UpdateAsync(resource);
 
         return Ok();
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Product>> GetAllAsync()
+    public async Task<IEnumerable<ProductViewModel>> GetAllAsync()
     {
         var products = await _productService.GetListAsync();
 
-        return products;
+        return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
     }
 }
