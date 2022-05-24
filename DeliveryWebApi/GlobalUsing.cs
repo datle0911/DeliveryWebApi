@@ -6,6 +6,7 @@ global using DeliveryWebApi.Mqtt;
 global using DeliveryWebApi.Mapping;
 global using DeliveryWebApi.ViewModels;
 global using DeliveryWebApi.ViewModels.OrderViewModels;
+global using DeliveryWebApi.ViewModels.OrderDetailViewModels;
 
 global using AutoMapper;
 global using Microsoft.EntityFrameworkCore;

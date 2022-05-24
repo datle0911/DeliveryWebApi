@@ -2,7 +2,7 @@
 
 public class SaveOrderViewModel
 {
-    public SaveOrderViewModel(string orderId, int customerId, List<OrderDetailViewModel> details, DateTime orderTimestamp, string orderAddress, string orderQrCode, string orderRobot, double totalPrice, EOrderStatus orderStatus, EOrderTracking orderTracking)
+    public SaveOrderViewModel(string orderId, int customerId, List<SaveOrderDetailViewModel> details, DateTime orderTimestamp, string orderAddress, string orderQrCode, string orderRobot, double totalPrice, EOrderStatus orderStatus, EOrderTracking orderTracking)
     {
         OrderId = orderId;
         CustomerId = customerId;
@@ -22,7 +22,7 @@ public class SaveOrderViewModel
 
     public string OrderId { get; set; }
     public int CustomerId { get; set; }
-    public List<OrderDetailViewModel> Details { get; set; } = new List<OrderDetailViewModel>();
+    public List<SaveOrderDetailViewModel> Details { get; set; } = new List<SaveOrderDetailViewModel>();
     public DateTime OrderTimestamp { get; set; }
     public string OrderAddress { get; set; }
     public string OrderQrCode { get; set; }

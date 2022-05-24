@@ -1,13 +1,13 @@
-﻿namespace DeliveryWebApi.ViewModels;
+﻿namespace DeliveryWebApi.ViewModels.OrderViewModels;
 
-public class OrderDetailViewModel
+public class SaveOrderDetailViewModel
 {
-    public OrderDetailViewModel()
+    public SaveOrderDetailViewModel()
     {
 
     }
 
-    public OrderDetailViewModel(int productId, int quantity, double total)
+    public SaveOrderDetailViewModel(int productId, int quantity, double total)
     {
         ProductId = productId;
         Quantity = quantity;

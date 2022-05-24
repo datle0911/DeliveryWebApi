@@ -3,17 +3,26 @@
 public class OrderService
 {
     private readonly OrderRepository _orderRepository;
+    private readonly CustomerRepository _customerRepository;
+    private readonly ProductRepository _productRepository;
     private readonly UnitOfWork _unitOfWork;
 
-    public OrderService(OrderRepository orderRepository, UnitOfWork unitOfWork)
+    public OrderService(OrderRepository orderRepository, CustomerRepository customerRepository, ProductRepository productRepository, UnitOfWork unitOfWork)
     {
         _orderRepository = orderRepository;
+        _customerRepository = customerRepository;
+        _productRepository = productRepository;
         _unitOfWork = unitOfWork;
     }
 
     public async Task AddAsync(Order order)
     {
-        await _orderRepository.Add(order);
+        var customer = await _customerRepository.FindByIdAsync(order.CustomerId);
+        foreach(OrderDetail detail in order.Details)
+        {
+            detail.Product = await _productRepository.GetAsync(detail.ProductId);
+        }
+        await _orderRepository.Add(order, customer);
         await _unitOfWork.SaveChanges();
     }
 

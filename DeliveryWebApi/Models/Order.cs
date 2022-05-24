@@ -6,10 +6,12 @@ public class Order
     {
 
     }
-    public Order(string orderId, int customerId, List<OrderDetail> details, DateTime orderTimestamp, string orderAddress, string orderQrCode, string orderRobot, double totalPrice, EOrderStatus orderStatus, EOrderTracking orderTracking)
+
+    public Order(string orderId, int customerId, Customer customer, List<OrderDetail> details, DateTime orderTimestamp, string orderAddress, string orderQrCode, string orderRobot, double totalPrice, EOrderStatus orderStatus, EOrderTracking orderTracking)
     {
         OrderId = orderId;
         CustomerId = customerId;
+        Customer = customer;
         Details = details;
         OrderTimestamp = orderTimestamp;
         OrderAddress = orderAddress;

@@ -2,9 +2,10 @@
 
 public class OrderViewModel
 {
-    public OrderViewModel(int customerId, List<OrderDetailViewModel> details, DateTime orderTimestamp, string orderAddress, string orderQrCode, string orderRobot, double totalPrice, EOrderStatus orderStatus, EOrderTracking orderTracking)
+    public OrderViewModel(string orderId, CustomerViewModel customer, List<OrderDetailViewModel> details, DateTime orderTimestamp, string orderAddress, string orderQrCode, string orderRobot, double totalPrice, EOrderStatus orderStatus, EOrderTracking orderTracking)
     {
-        CustomerId = customerId;
+        OrderId = orderId;
+        Customer = customer;
         Details = details;
         OrderTimestamp = orderTimestamp;
         OrderAddress = orderAddress;
@@ -19,7 +20,8 @@ public class OrderViewModel
 
     }
 
-    public int CustomerId { get; set; }
+    public string OrderId { get; set; }
+    public CustomerViewModel Customer { get; set; } = new CustomerViewModel();
     public List<OrderDetailViewModel> Details { get; set; } = new List<OrderDetailViewModel>();
     public DateTime OrderTimestamp { get; set; }
     public string OrderAddress { get; set; }

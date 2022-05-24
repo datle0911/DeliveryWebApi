@@ -8,9 +8,10 @@ public class OrderRepository : BaseRepository
     {
     }
 
-    public async Task Add(Order order)
+    public async Task Add(Order order, Customer customer)
     {
-        throw new NotImplementedException();
+        order.Customer = customer;
+        _context.Orders.Add(order);
     }
 
     public void Update(Order order)

@@ -8,6 +8,14 @@ public class CustomerRepository : BaseRepository
     {
     }
 
+    public async Task<Customer> FindByIdAsync(int id)
+    {
+        var customer = await _context.Customers
+            .FirstOrDefaultAsync(c => c.CustomerId == id);
+
+        return customer;
+    }
+
     public async Task Add(Customer customer)
     {
         await _context.AddAsync(customer);
