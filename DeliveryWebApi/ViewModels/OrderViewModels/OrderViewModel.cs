@@ -1,13 +1,12 @@
-﻿namespace DeliveryWebApi.ViewModels;
+﻿namespace DeliveryWebApi.ViewModels.OrderViewModels;
 
 public class OrderViewModel
 {
-    public OrderViewModel(int orderId, int customerId, List<OrderDetailViewModel> details, DateTime orderDate, string orderAddress, string orderQrCode, string orderRobot, double totalPrice, EOrderStatus orderStatus, EOrderTracking orderTracking)
+    public OrderViewModel(int customerId, List<OrderDetailViewModel> details, DateTime orderTimestamp, string orderAddress, string orderQrCode, string orderRobot, double totalPrice, EOrderStatus orderStatus, EOrderTracking orderTracking)
     {
-        OrderId = orderId;
         CustomerId = customerId;
         Details = details;
-        OrderDate = orderDate;
+        OrderTimestamp = orderTimestamp;
         OrderAddress = orderAddress;
         OrderQrCode = orderQrCode;
         OrderRobot = orderRobot;
@@ -20,10 +19,9 @@ public class OrderViewModel
 
     }
 
-    public int OrderId { get; set; }
     public int CustomerId { get; set; }
     public List<OrderDetailViewModel> Details { get; set; } = new List<OrderDetailViewModel>();
-    public DateTime OrderDate { get; set; }
+    public DateTime OrderTimestamp { get; set; }
     public string OrderAddress { get; set; }
     public string OrderQrCode { get; set; }
     public string OrderRobot { get; set; }

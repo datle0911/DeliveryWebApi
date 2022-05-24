@@ -11,7 +11,7 @@ public class OrderService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task AddAsync(OrderViewModel order)
+    public async Task AddAsync(Order order)
     {
         await _orderRepository.Add(order);
         await _unitOfWork.SaveChanges();

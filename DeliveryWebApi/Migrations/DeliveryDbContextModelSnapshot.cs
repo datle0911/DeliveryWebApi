@@ -52,8 +52,8 @@ namespace DeliveryWebApi.Migrations
 
                     b.Property<string>("CustomerUserName")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("CustomerId");
 
@@ -62,8 +62,9 @@ namespace DeliveryWebApi.Migrations
 
             modelBuilder.Entity("DeliveryWebApi.Models.Order", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -72,9 +73,6 @@ namespace DeliveryWebApi.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrderQrCode")
                         .IsRequired()
@@ -89,6 +87,9 @@ namespace DeliveryWebApi.Migrations
                     b.Property<int>("OrderStatus")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("OrderTimestamp")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("OrderTracking")
                         .HasColumnType("int");
 
@@ -99,13 +100,17 @@ namespace DeliveryWebApi.Migrations
 
                     b.HasIndex("CustomerId");
 
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("DeliveryWebApi.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -166,8 +171,8 @@ namespace DeliveryWebApi.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()

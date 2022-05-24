@@ -12,7 +12,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.UserName).HasMaxLength(12);
         builder.Property(u => u.Password).HasMaxLength(12);
-        builder.Property(u => u.FullName).HasMaxLength(12);
+        builder.Property(u => u.FullName).HasMaxLength(50);
         builder.Property(u => u.PhoneNumber).HasMaxLength(12);
         builder.Property(u => u.Roles).IsRequired();
     }

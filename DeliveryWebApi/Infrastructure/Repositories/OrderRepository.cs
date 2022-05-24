@@ -8,33 +8,9 @@ public class OrderRepository : BaseRepository
     {
     }
 
-    public async Task Add(OrderViewModel order)
+    public async Task Add(Order order)
     {
-        List<OrderDetail> details = new();
-        var newOrder = new Order(order.OrderId, order.CustomerId, details, order.OrderDate, order.OrderAddress, order.OrderQrCode, order.OrderRobot, order.TotalPrice, order.OrderStatus, order.OrderTracking);
-
-        var customer = _context.Customers.First(c => c.CustomerId == order.CustomerId);
-        newOrder.Customer = customer;
-
-        foreach(OrderDetailViewModel detail in order.Details)
-        {
-            var product = _context.Products.First(p => p.ProductId == detail.ProductId);
-            OrderDetail newDetail = new(order.OrderId, detail.ProductId, product, detail.Quantity, detail.Total);
-            newOrder.Details.Add(newDetail);
-
-            _context.OrderDetails.Attach(newDetail);
-            _context.Products.Attach(newDetail.Product);
-        }
-        _context.Customers.Attach(newOrder.Customer);
-
-        //for (int i = 0; i < newOrder.Details.Count; i++)
-        //{
-        //    _context.OrderDetails.Attach(newOrder.Details[i]);
-        //    _context.Products.Attach(newOrder.Details[i].Product);
-        //}
-
-        await _context.AddAsync(newOrder);
-        await _context.AddRangeAsync(newOrder.Details);
+        throw new NotImplementedException();
     }
 
     public void Update(Order order)

@@ -14,12 +14,11 @@ public class Customer
     {
 
     }
-#pragma warning disable CS8618
+
     public int CustomerId { get; set; }
     public string CustomerUserName { get; set; }
     public string CustomerPassword { get; set; }
     public string CustomerFullName { get; set; }
     public string CustomerPhoneNumber { get; set; }
     public string CustomerEmail { get; set; }
-#pragma warning restore CS8618
 }

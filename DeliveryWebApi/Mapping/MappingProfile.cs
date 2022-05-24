@@ -14,6 +14,10 @@ public class MappingProfile : Profile
         CreateMap<Order, OrderViewModel>();
         CreateMap<OrderViewModel, Order>();
 
+        // Save Order mapped
+        CreateMap<Order, SaveOrderViewModel>();
+        CreateMap<SaveOrderViewModel, Order>();
+
         // Order Details mapped
         CreateMap<OrderDetail, OrderDetailViewModel>();
         CreateMap<OrderDetailViewModel, OrderDetail>();

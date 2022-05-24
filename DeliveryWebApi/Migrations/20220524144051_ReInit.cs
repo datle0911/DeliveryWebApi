@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DeliveryWebApi.Migrations
 {
-    public partial class Initial : Migration
+    public partial class ReInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace DeliveryWebApi.Migrations
                 {
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerUserName = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    CustomerUserName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     CustomerPassword = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     CustomerFullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CustomerPhoneNumber = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
@@ -51,7 +51,7 @@ namespace DeliveryWebApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
                     Roles = table.Column<int>(type: "int", nullable: false)
                 },
@@ -64,9 +64,9 @@ namespace DeliveryWebApi.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderTimestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrderAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderQrCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderRobot = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -89,7 +89,7 @@ namespace DeliveryWebApi.Migrations
                 name: "OrderDetails",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<double>(type: "float", nullable: false)
@@ -120,6 +120,12 @@ namespace DeliveryWebApi.Migrations
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_OrderId",
+                table: "Orders",
+                column: "OrderId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

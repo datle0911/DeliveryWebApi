@@ -8,7 +8,8 @@ public class OrderDetailEntityTypeConfiguration : IEntityTypeConfiguration<Order
     {
         builder.HasKey(od => new { od.OrderId, od.ProductId });
         builder.Property(od => od.OrderId)
-            .IsRequired();
+            .IsRequired()
+            .HasMaxLength(256);
 
         builder.HasOne(od => od.Product).WithMany().HasForeignKey(od => od.ProductId);
 
