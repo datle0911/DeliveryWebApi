@@ -30,6 +30,20 @@ public class ProductsController : Controller
         return Ok();
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        var resource = _productService.GetAsync(id);
+        
+        if(resource.Result is null)
+        {
+            return BadRequest("Product Not Found");
+        }
+
+        await _productService.DeleteAsync(resource.Result);
+        return Ok();
+    }
+
     [HttpGet]
     public async Task<IEnumerable<ProductViewModel>> GetAllAsync()
     {

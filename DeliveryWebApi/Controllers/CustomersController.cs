@@ -15,6 +15,12 @@ public class CustomersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PostAsync(CustomerViewModel customer)
     {
+        var mockCustomer = _customerService.FindByEmailAsync(customer.CustomerEmail);
+        if(mockCustomer.Result is not null)
+        {
+            return BadRequest("Customer email existed");
+        }
+
         var resource = _mapper.Map<CustomerViewModel, Customer>(customer);
         await _customerService.AddAsync(resource);
 
@@ -26,6 +32,21 @@ public class CustomersController : ControllerBase
     {
         var resource = _mapper.Map<CustomerViewModel, Customer>(customer);
         await _customerService.UpdateAsync(resource);
+
+        return Ok();
+    }
+
+    [HttpDelete("{customerEmail}")]
+    public async Task<IActionResult> DeleteAsync(string customerEmail)
+    {
+        var resource = _customerService.FindByEmailAsync(customerEmail);
+        
+        if(resource.Result is null)
+        {
+            return BadRequest("Customer not found");
+        }
+
+        await _customerService.DeleteAsync(resource.Result);
 
         return Ok();
     }

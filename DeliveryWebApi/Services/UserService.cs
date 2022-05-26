@@ -38,4 +38,14 @@ public class UserService
     {
         return await _userRepository.GetListAsync();
     }
+
+    public async Task<User?> FindByMinimal(MinimalUserViewModel user)
+    {
+        return await _userRepository.FindByMinimalAsync(user);
+    }
+
+    public async Task<User?> GetByUserName(string userName)
+    {
+        return await _userRepository.FindByUserNameAsync(userName);
+    }
 }

@@ -40,4 +40,23 @@ public class UserRepository : BaseRepository
 
         return users;
     }
+
+    public async Task<User?> FindByMinimalAsync(MinimalUserViewModel user)
+    {
+        var resource = await _context.Users
+            .FirstOrDefaultAsync(u =>
+                u.UserName == user.UserName &&
+                u.Password == user.Password);
+
+        return resource;
+    }
+
+    public async Task<User?> FindByUserNameAsync(string userName)
+    {
+        var resource = await _context.Users
+            .FirstOrDefaultAsync(u =>
+            u.UserName == userName);
+
+        return resource;
+    }
 }

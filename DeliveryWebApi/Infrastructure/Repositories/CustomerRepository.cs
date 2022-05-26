@@ -8,7 +8,7 @@ public class CustomerRepository : BaseRepository
     {
     }
 
-    public async Task<Customer> FindByIdAsync(int id)
+    public async Task<Customer?> FindByIdAsync(int id)
     {
         var customer = await _context.Customers
             .FirstOrDefaultAsync(c => c.CustomerId == id);
@@ -47,5 +47,13 @@ public class CustomerRepository : BaseRepository
             .ToListAsync();
 
         return customers;
+    }
+
+    public async Task<Customer?> FindByEmailAsync(string email)
+    {
+        var customer = await _context.Customers
+            .FirstOrDefaultAsync(c => c.CustomerEmail == email);
+
+        return customer;
     }
 }

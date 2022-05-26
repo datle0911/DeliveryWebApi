@@ -38,4 +38,10 @@ public class CustomerService
     {
         return await _customerRepository.GetAllAsync();
     }
+
+    public async Task<Customer> FindByEmailAsync(string email)
+    {
+        return await _customerRepository.FindByEmailAsync(email);
+    }
+
 }

@@ -7,6 +7,8 @@ global using DeliveryWebApi.Mapping;
 global using DeliveryWebApi.ViewModels;
 global using DeliveryWebApi.ViewModels.OrderViewModels;
 global using DeliveryWebApi.ViewModels.OrderDetailViewModels;
+global using DeliveryWebApi.ViewModels.ProductViewModels;
+global using DeliveryWebApi.ViewModels.UserViewModels;
 
 global using AutoMapper;
 global using Microsoft.EntityFrameworkCore;

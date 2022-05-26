@@ -1,4 +1,4 @@
-﻿namespace DeliveryWebApi.ViewModels;
+﻿namespace DeliveryWebApi.ViewModels.UserViewModels;
 
 public class UserViewModel
 {
