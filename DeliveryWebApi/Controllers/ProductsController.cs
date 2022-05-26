@@ -45,10 +45,20 @@ public class ProductsController : Controller
     }
 
     [HttpGet]
-    public async Task<IEnumerable<ProductViewModel>> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync([FromQuery] bool minimal)
     {
-        var products = await _productService.GetListAsync();
+        if(minimal == true)
+        {
+            var minimalProducts = await _productService.GetMinimalListAsync();
 
-        return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
+            return Ok(minimalProducts);
+        }
+
+        else
+        {
+            var products = await _productService.GetListAsync();
+
+            return Ok(_mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products));
+        }
     }
 }

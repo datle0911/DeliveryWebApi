@@ -28,6 +28,18 @@ public class ProductRepository : BaseRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<MinimalProductViewModel>> GetAllMinimalAsync()
+    {
+        return await _context.Products
+            .Select(p => new MinimalProductViewModel(
+                p.ProductName,
+                p.Description,
+                p.ProductPrice,
+                p.ProductStatus))
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
     public async Task Add(Product product)
     {
         await _context.AddAsync(product);

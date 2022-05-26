@@ -12,7 +12,6 @@ public class UsersController : Controller
         _mapper = mapper;
     }
 
-
     [HttpPost]
     public async Task<IActionResult> PostAsync(UserViewModel user)
     {

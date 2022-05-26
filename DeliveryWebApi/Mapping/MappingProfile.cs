@@ -30,8 +30,16 @@ public class MappingProfile : Profile
         CreateMap<Product, ProductViewModel>();
         CreateMap<ProductViewModel, Product>();
 
+        // Minimal Product mapped
+        CreateMap<Product, MinimalProductViewModel>();
+        CreateMap<MinimalProductViewModel, Product>();
+
         // User mapped
         CreateMap<User, UserViewModel>();
         CreateMap<UserViewModel, User>();
+
+        // Minimal User mapped
+        CreateMap<User, MinimalUserViewModel>();
+        CreateMap<MinimalUserViewModel, User>();
     }
 }

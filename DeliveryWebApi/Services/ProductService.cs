@@ -43,4 +43,8 @@ public class ProductService
     {
         return await _productRepository.GetAllAsync();
     }
+    public async Task<IEnumerable<MinimalProductViewModel>> GetMinimalListAsync()
+    {
+        return await _productRepository.GetAllMinimalAsync();
+    }
 }
