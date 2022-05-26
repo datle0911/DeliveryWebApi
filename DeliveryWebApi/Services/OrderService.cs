@@ -44,4 +44,9 @@ public class OrderService
     {
         return await _orderRepository.GetListAsync();
     }
+
+    public async Task<IEnumerable<MinimalOrderViewModel>> GetMinimalOrdersAsync()
+    {
+        return await _orderRepository.GetMinimalListAsync();
+    }
 }

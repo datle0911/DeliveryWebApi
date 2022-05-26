@@ -10,6 +10,11 @@ public class MinimalProductViewModel
         ProductStatus = productStatus;
     }
 
+    public MinimalProductViewModel()
+    {
+
+    }
+
     public string ProductName { get; set; }
     public string Description { get; set; }
     public double ProductPrice { get; set; }

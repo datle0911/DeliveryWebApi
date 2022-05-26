@@ -32,10 +32,20 @@ public class OrdersController : Controller
     }
 
     [HttpGet]
-    public async Task<IEnumerable<OrderViewModel>> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync([FromQuery] bool minimal)
     {
-        var orders = await _orderService.GetOrdersAsync();
+        if(minimal is true)
+        {
+            var orders = await _orderService.GetMinimalOrdersAsync();
 
-        return _mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(orders);
+            return Ok(orders);
+        }
+
+        else
+        {
+            var orders = await _orderService.GetOrdersAsync();
+
+            return Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(orders));
+        }
     }
 }
