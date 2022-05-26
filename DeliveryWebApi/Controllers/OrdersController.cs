@@ -23,13 +23,10 @@ public class OrdersController : Controller
         return Ok();
     }
 
-    [HttpPut]
-    public async Task<IActionResult> PutAsync(SaveOrderViewModel order)
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchAsync(string id, [FromBody] JsonPatchDocument<Order> patchEntity)
     {
-        //var resource = new Order(order.CustomerId, order.Details, order.OrderDate, order.OrderAddress, order.OrderQrCode, order.OrderRobot, order.TotalPrice, order.OrderStatus, order.OrderTracking);
-
-        var resource = _mapper.Map<SaveOrderViewModel, Order>(order);
-        await _orderService.UpdateAsync(resource);
+        await _orderService.UpdateAsync(id, patchEntity);
 
         return Ok();
     }

@@ -8,15 +8,15 @@ public class OrderRepository : BaseRepository
     {
     }
 
-    public async Task Add(Order order, Customer customer)
+    public void Add(Order order, Customer customer)
     {
         order.Customer = customer;
         _context.Orders.Add(order);
     }
 
-    public void Update(Order order)
+    public void Update(Order order, JsonPatchDocument<Order> patchEntity)
     {
-        _context.Orders.Update(order);
+        patchEntity.ApplyTo(order);
     }
 
     public void Delete(Order order)
@@ -34,5 +34,13 @@ public class OrderRepository : BaseRepository
             .ToListAsync();
 
         return orders;
+    }
+
+    public async Task<Order?> FindByIdAsync(string id)
+    {
+        var resource = await _context.Orders
+            .FirstOrDefaultAsync(o => o.OrderId == id);
+
+        return resource;
     }
 }

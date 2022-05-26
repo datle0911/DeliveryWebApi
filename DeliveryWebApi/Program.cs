@@ -34,7 +34,9 @@ builder.Services.AddTransient<CustomerService>();
 builder.Services.AddTransient<ProductService>();
 builder.Services.AddTransient<OrderService>();
 builder.Services.AddTransient<UserService>();
+
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddControllers().AddNewtonsoftJson();
 
 var app = builder.Build();
 

@@ -22,13 +22,15 @@ public class OrderService
         {
             detail.Product = await _productRepository.GetAsync(detail.ProductId);
         }
-        await _orderRepository.Add(order, customer);
+        _orderRepository.Add(order, customer);
         await _unitOfWork.SaveChanges();
     }
 
-    public async Task UpdateAsync(Order order)
+    public async Task UpdateAsync(string id, JsonPatchDocument<Order> patchEntity)
     {
-        _orderRepository.Update(order);
+        var order = _orderRepository.FindByIdAsync(id);
+
+        _orderRepository.Update(order.Result, patchEntity);
         await _unitOfWork.SaveChanges();
     }
 

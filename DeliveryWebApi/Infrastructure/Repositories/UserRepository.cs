@@ -13,9 +13,9 @@ public class UserRepository : BaseRepository
         await _context.AddAsync(user);
     }
 
-    public void Update(User user)
+    public void Update(User user, JsonPatchDocument<User> patchEntity)
     {
-        _context.Users.Update(user);
+        patchEntity.ApplyTo(user);
     }
 
     public void Delete(User user)
@@ -54,8 +54,15 @@ public class UserRepository : BaseRepository
     public async Task<User?> FindByUserNameAsync(string userName)
     {
         var resource = await _context.Users
-            .FirstOrDefaultAsync(u =>
-            u.UserName == userName);
+            .FirstOrDefaultAsync(u => u.UserName == userName);
+
+        return resource;
+    }
+
+    public async Task<User?> FindByIdAsync(int id)
+    {
+        var resource = await _context.Users
+            .FirstOrDefaultAsync(u => u.UserId == id);
 
         return resource;
     }

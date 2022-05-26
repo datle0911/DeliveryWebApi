@@ -17,9 +17,11 @@ public class UserService
         await _unitOfWork.SaveChanges();
     }
 
-    public async Task UpdateAsync(User user)
+    public async Task UpdateAsync(int id, JsonPatchDocument<User> patchEntity)
     {
-        _userRepository.Update(user);
+        var user = _userRepository.FindByIdAsync(id);
+
+        _userRepository.Update(user.Result, patchEntity);
         await _unitOfWork.SaveChanges();
     }
 

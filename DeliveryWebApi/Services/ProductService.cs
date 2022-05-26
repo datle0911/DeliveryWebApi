@@ -27,9 +27,11 @@ public class ProductService
         await _unitOfWork.SaveChanges();
     }
 
-    public async Task UpdateAsync(Product product)
+    public async Task UpdateAsync(int id, JsonPatchDocument<Product> patchEntity)
     {
-        _productRepository.Update(product);
+        var product = _productRepository.GetAsync(id);
+
+        _productRepository.Update(product.Result, patchEntity);
         await _unitOfWork.SaveChanges();
     }
 

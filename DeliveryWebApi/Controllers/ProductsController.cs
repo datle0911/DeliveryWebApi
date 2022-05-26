@@ -21,11 +21,10 @@ public class ProductsController : Controller
         return Ok();
     }
 
-    [HttpPut]
-    public async Task<IActionResult> PutAsync(ProductViewModel product)
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchAsync(int id, [FromBody] JsonPatchDocument<Product> patchEntity)
     {
-        var resource = _mapper.Map<ProductViewModel, Product>(product);
-        await _productService.UpdateAsync(resource);
+        await _productService.UpdateAsync(id, patchEntity);
 
         return Ok();
     }

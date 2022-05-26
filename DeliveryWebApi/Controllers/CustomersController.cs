@@ -1,4 +1,6 @@
-﻿namespace DeliveryWebApi.Controllers;
+﻿using Microsoft.AspNetCore.JsonPatch;
+
+namespace DeliveryWebApi.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class CustomersController : ControllerBase
@@ -27,11 +29,10 @@ public class CustomersController : ControllerBase
         return Ok();
     }
 
-    [HttpPut]
-    public async Task<IActionResult> PutAsync(CustomerViewModel customer)
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchAsync(int id, [FromBody] JsonPatchDocument<Customer> patchEntity)
     {
-        var resource = _mapper.Map<CustomerViewModel, Customer>(customer);
-        await _customerService.UpdateAsync(resource);
+        await _customerService.UpdateAsync(id, patchEntity);
 
         return Ok();
     }

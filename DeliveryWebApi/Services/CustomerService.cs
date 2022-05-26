@@ -17,9 +17,11 @@ public class CustomerService
         await _unitOfWork.SaveChanges();
     }
 
-    public async Task UpdateAsync(Customer customer)
+    public async Task UpdateAsync(int id, JsonPatchDocument<Customer> patchEntity)
     {
-        _customerRepository.Update(customer);
+        var customer = _customerRepository.FindByIdAsync(id);
+
+        _customerRepository.Update(customer.Result, patchEntity);
         await _unitOfWork.SaveChanges();
     }
 

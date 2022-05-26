@@ -27,11 +27,10 @@ public class UsersController : Controller
         return Ok();
     }
 
-    [HttpPut]
-    public async Task<IActionResult> PutAsync(UserViewModel user)
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchAsync(int id, [FromBody] JsonPatchDocument<User> patchEntity)
     {
-        var resource = _mapper.Map<UserViewModel, User>(user);
-        await _userService.UpdateAsync(resource);
+        await _userService.UpdateAsync(id, patchEntity);
 
         return Ok();
     }
