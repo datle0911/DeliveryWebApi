@@ -21,7 +21,7 @@ public class UserService
     {
         var user = _userRepository.FindByIdAsync(id);
 
-        _userRepository.Update(user.Result, patchEntity);
+        patchEntity.ApplyTo(user.Result);
         await _unitOfWork.SaveChanges();
     }
 

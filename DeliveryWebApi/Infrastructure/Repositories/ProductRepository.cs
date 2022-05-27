@@ -45,11 +45,6 @@ public class ProductRepository : BaseRepository
         await _context.AddAsync(product);
     }
 
-    public void Update(Product product, JsonPatchDocument<Product> patchEntity)
-    {
-        patchEntity.ApplyTo(product);
-    }
-
     public void Delete(Product product)
     {
         _context.Products.Remove(product);

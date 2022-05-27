@@ -13,11 +13,6 @@ public class UserRepository : BaseRepository
         await _context.AddAsync(user);
     }
 
-    public void Update(User user, JsonPatchDocument<User> patchEntity)
-    {
-        patchEntity.ApplyTo(user);
-    }
-
     public void Delete(User user)
     {
         _context.Users.Remove(user);

@@ -31,7 +31,7 @@ public class ProductService
     {
         var product = _productRepository.GetAsync(id);
 
-        _productRepository.Update(product.Result, patchEntity);
+        patchEntity.ApplyTo(product.Result);
         await _unitOfWork.SaveChanges();
     }
 
@@ -45,6 +45,7 @@ public class ProductService
     {
         return await _productRepository.GetAllAsync();
     }
+
     public async Task<IEnumerable<MinimalProductViewModel>> GetMinimalListAsync()
     {
         return await _productRepository.GetAllMinimalAsync();

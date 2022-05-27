@@ -22,7 +22,9 @@ public class OrderService
         {
             detail.Product = await _productRepository.GetAsync(detail.ProductId);
         }
-        _orderRepository.Add(order, customer);
+
+        order.Customer = customer;
+        _orderRepository.Add(order);
         await _unitOfWork.SaveChanges();
     }
 

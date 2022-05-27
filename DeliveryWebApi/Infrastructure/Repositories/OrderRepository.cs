@@ -8,9 +8,8 @@ public class OrderRepository : BaseRepository
     {
     }
 
-    public void Add(Order order, Customer customer)
+    public void Add(Order order)
     {
-        order.Customer = customer;
         _context.Orders.Add(order);
     }
 

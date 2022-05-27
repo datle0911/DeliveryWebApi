@@ -21,11 +21,6 @@ public class CustomerRepository : BaseRepository
         await _context.AddAsync(customer);
     }
 
-    public void Update(Customer customer, JsonPatchDocument<Customer> patchEntity)
-    {
-        patchEntity.ApplyTo(customer);
-    }
-
     public void Delete(Customer customer)
     {
         _context.Customers.Remove(customer);

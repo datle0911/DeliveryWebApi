@@ -21,7 +21,7 @@ public class CustomerService
     {
         var customer = _customerRepository.FindByIdAsync(id);
 
-        _customerRepository.Update(customer.Result, patchEntity);
+        patchEntity.ApplyTo(customer.Result);
         await _unitOfWork.SaveChanges();
     }
 
