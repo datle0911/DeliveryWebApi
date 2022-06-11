@@ -6,40 +6,63 @@ public class ProductsController : Controller
 {
     private readonly ProductService _productService;
     private readonly IMapper _mapper;
-    public ProductsController(ProductService productService, IMapper mapper)
+    private readonly IHubContext<RealtimeHub> _realtimeHub;
+    public ProductsController(ProductService productService, IMapper mapper, IHubContext<RealtimeHub> realtimeHub)
     {
         _productService = productService;
         _mapper = mapper;
+        _realtimeHub = realtimeHub;
     }
 
     [HttpPost]
     public async Task<IActionResult> PostAsync(ProductViewModel product)
     {
+        // Add and Save to Database
         var resource = _mapper.Map<ProductViewModel, Product>(product);
         await _productService.AddAsync(resource);
 
-        return Ok();
+        // Realtime signalR transmit
+        var message = new Message(Contents.SuccessfullyPost + "Product. Timestamp: " + DateTime.Now.ToString());
+        await _realtimeHub.Clients.All.SendAsync(message.Content);
+
+        // Complete
+        return Ok(message.Content);
     }
 
     [HttpPatch("{id}")]
     public async Task<IActionResult> PatchAsync(int id, [FromBody] JsonPatchDocument<Product> patchEntity)
     {
+        // Update Product
         await _productService.UpdateAsync(id, patchEntity);
 
-        return Ok();
+        // Realtime signalR transmit
+        var message = new Message(Contents.SuccessfullyPutPatch + "Product. Timestamp: " + DateTime.Now.ToString());
+        await _realtimeHub.Clients.All.SendAsync(message.Content);
+
+        // Complete
+        return Ok(message.Content);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
+        // Check if not existed
         var resource = _productService.GetAsync(id);
         
         if(resource.Result is null)
         {
-            return BadRequest("Product Not Found");
+            var warning = new Message(Contents.ExistedObject + "Product");
+            return BadRequest(warning.Content);
         }
 
+        // Delete Product
         await _productService.DeleteAsync(resource.Result);
+
+        // Realtime signalR transmit
+        var message = new Message(Contents.SuccessfullyDelete + "Product. Timestamp: " + DateTime.Now.ToString());
+        await _realtimeHub.Clients.All.SendAsync(message.Content);
+
+        // Complete
         return Ok();
     }
 
