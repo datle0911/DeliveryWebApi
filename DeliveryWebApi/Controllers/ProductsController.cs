@@ -22,7 +22,7 @@ public class ProductsController : Controller
         await _productService.AddAsync(resource);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyPost + "Product. Timestamp: " + DateTime.Now.ToString());
+        var message = new Message(Contents.SuccessfullyPost + "Product " + product.ProductName + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete
@@ -36,7 +36,7 @@ public class ProductsController : Controller
         await _productService.UpdateAsync(id, patchEntity);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyPutPatch + "Product. Timestamp: " + DateTime.Now.ToString());
+        var message = new Message(Contents.SuccessfullyPutPatch + "Product with ID: " + id.ToString() + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete
@@ -51,7 +51,7 @@ public class ProductsController : Controller
         
         if(resource.Result is null)
         {
-            var warning = new Message(Contents.ExistedObject + "Product");
+            var warning = new Message(Contents.NotFoundObject + "Product");
             return BadRequest(warning.Content);
         }
 
@@ -59,11 +59,11 @@ public class ProductsController : Controller
         await _productService.DeleteAsync(resource.Result);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyDelete + "Product. Timestamp: " + DateTime.Now.ToString());
+        var message = new Message(Contents.SuccessfullyDelete + "Product with ID: " + id.ToString() + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete
-        return Ok();
+        return Ok(message.Content);
     }
 
     [HttpGet]

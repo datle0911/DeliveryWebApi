@@ -32,7 +32,7 @@ public class CustomersController : ControllerBase
         await _customerService.AddAsync(resource);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyPost + "Customer");
+        var message = new Message(Contents.SuccessfullyPost + "Customer " + customer.CustomerUserName + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete
@@ -46,7 +46,7 @@ public class CustomersController : ControllerBase
         await _customerService.UpdateAsync(id, patchEntity);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyPutPatch + "Customer");
+        var message = new Message(Contents.SuccessfullyPutPatch + "Customer with ID: " + id.ToString() + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete
@@ -69,11 +69,11 @@ public class CustomersController : ControllerBase
         await _customerService.DeleteAsync(resource.Result);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyPutPatch + "Customer");
+        var message = new Message(Contents.SuccessfullyDelete + "Customer with email " + customerEmail + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete
-        return Ok();
+        return Ok(message.Content);
     }
 
     [HttpGet]
@@ -84,8 +84,7 @@ public class CustomersController : ControllerBase
         return _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerViewModel>>(customers);
     }
 
-    [HttpGet]
-    [Route("{name}")]
+    [HttpGet("{name}")]
     public async Task<IEnumerable<CustomerViewModel>> GetByName(string name)
     {
         var customers = await _customerService.GetByName(name);

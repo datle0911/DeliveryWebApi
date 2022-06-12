@@ -38,7 +38,7 @@ public class OrdersController : Controller
         await _orderService.UpdateAsync(id, patchEntity);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyPutPatch + "Order. Timestamp: " + DateTime.Now.ToString());
+        var message = new Message(Contents.SuccessfullyPutPatch + "Order " + id + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete

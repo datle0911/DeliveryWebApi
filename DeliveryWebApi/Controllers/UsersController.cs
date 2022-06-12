@@ -21,10 +21,7 @@ public class UsersController : Controller
         var mockUser = _userService.GetByUserName(user.UserName);
         if (mockUser.Result is not null)
         {
-            // Realtime signalR transmit
-            var warning = new Message(Contents.ExistedObject + "User");
-            await _realtimeHub.Clients.All.SendAsync(warning.Content);
-
+            var warning = new Message(Contents.ExistedObject + "User " + user.UserName);
             return BadRequest(warning.Content);
         }
 
@@ -33,7 +30,7 @@ public class UsersController : Controller
         await _userService.AddAsync(resource);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyPost + "User. Timestamp: " + DateTime.Now.ToString());
+        var message = new Message(Contents.SuccessfullyPost + "User " + user.UserName + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete
@@ -47,7 +44,7 @@ public class UsersController : Controller
         await _userService.UpdateAsync(id, patchEntity);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyPutPatch + "User. Timestamp: " + DateTime.Now.ToString());
+        var message = new Message(Contents.SuccessfullyPutPatch + "User with ID: " + id.ToString() + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete
@@ -61,7 +58,7 @@ public class UsersController : Controller
         var resource = _userService.FindByMinimal(user);
         if(resource.Result is null)
         {
-            var warning = new Message(Contents.ExistedObject + "User");
+            var warning = new Message(Contents.ExistedObject + "UserName: " + user.UserName);
             return BadRequest(warning.Content);
         }
 
@@ -69,7 +66,7 @@ public class UsersController : Controller
         await _userService.DeleteAsync(resource.Result);
 
         // Realtime signalR transmit
-        var message = new Message(Contents.SuccessfullyDelete + "User. Timestamp: " + DateTime.Now.ToString());
+        var message = new Message(Contents.SuccessfullyDelete + "User " + user.UserName + ". Timestamp: " + DateTime.Now.ToString());
         await _realtimeHub.Clients.All.SendAsync(message.Content);
 
         // Complete
