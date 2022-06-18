@@ -10,7 +10,7 @@ var config = builder.Configuration;
 
 builder.Services.AddDbContext<DeliveryDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LocalSqlServer"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CloudDatabase"));
 });
 
 builder.Services.AddControllers();
