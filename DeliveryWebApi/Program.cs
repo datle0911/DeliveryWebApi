@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<MqttClientHelperOptions>(config.GetSection("MqttClientHelperOptions"));
 builder.Services.AddSingleton<MqttClientHelper>();
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR().AddAzureSignalR("Endpoint=https://deliveryhub.service.signalr.net;AccessKey=dcdJYxKqdW4HO5IdzrHTqHYaxJRVhTlriKF9n4NGB0Y=;Version=1.0;");
 
 builder.Services.AddTransient<CustomerRepository>();
 builder.Services.AddTransient<ProductRepository>();
@@ -54,5 +54,10 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapHub<RealtimeHub>("/realtimehub");
+
+app.UseAzureSignalR(routes =>
+{
+    routes.MapHub<RealtimeHub>("/realtimehub");
+});
 
 app.Run();
