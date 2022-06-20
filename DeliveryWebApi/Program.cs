@@ -13,6 +13,15 @@ builder.Services.AddDbContext<DeliveryDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CloudDatabase"));
 });
 
+builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin();
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+    }
+));
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,7 +31,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<MqttClientHelperOptions>(config.GetSection("MqttClientHelperOptions"));
 builder.Services.AddSingleton<MqttClientHelper>();
 
-builder.Services.AddSignalR().AddAzureSignalR("Endpoint=https://deliveryhub.service.signalr.net;AccessKey=dcdJYxKqdW4HO5IdzrHTqHYaxJRVhTlriKF9n4NGB0Y=;Version=1.0;");
+builder.Services.AddSignalR().AddAzureSignalR(config.GetConnectionString("SignalRConnection"));
 
 builder.Services.AddTransient<CustomerRepository>();
 builder.Services.AddTransient<ProductRepository>();
@@ -48,6 +57,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
