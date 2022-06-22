@@ -10,7 +10,7 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
         builder.HasIndex(o => o.OrderId)
             .IsUnique();
         builder.Property(o => o.OrderId)
-            .HasMaxLength(256)
+            .HasMaxLength(50)
             .IsRequired();
 
         builder.HasOne(o => o.Customer).WithMany().HasForeignKey(o => o.CustomerId);

@@ -10,7 +10,8 @@ var config = builder.Configuration;
 
 builder.Services.AddDbContext<DeliveryDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CloudDatabase"));
+    options.UseMySql(builder.Configuration.GetConnectionString("CloudDatabase"),
+        Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.26-mysql"));
 });
 
 builder.Services.AddCors(options =>
