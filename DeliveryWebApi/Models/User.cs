@@ -14,6 +14,16 @@ public class User
         PhoneNumber = phoneNumber;
         Roles = roles;
     }
+
+    public User(int userId, string userName, string password, string fullName, string phoneNumber, ERoles roles)
+    {
+        UserId = userId;
+        UserName = userName;
+        Password = password;
+        FullName = fullName;
+        PhoneNumber = phoneNumber;
+        Roles = roles;
+    }
 #pragma warning disable CS8618
     public int UserId { get; set; }
     public string UserName { get; set; }

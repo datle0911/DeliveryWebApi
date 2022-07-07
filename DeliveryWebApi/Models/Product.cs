@@ -14,6 +14,16 @@ public class Product
         ProductPrice = productPrice;
         ProductStatus = productStatus;
     }
+
+    public Product(int productId, string productName, string description, byte[] productImage, double productPrice, EProductStatus productStatus)
+    {
+        ProductId = productId;
+        ProductName = productName;
+        Description = description;
+        ProductImage = productImage;
+        ProductPrice = productPrice;
+        ProductStatus = productStatus;
+    }
 #pragma warning disable CS8618
     public int ProductId { get; set; }
     public string ProductName { get; set; }

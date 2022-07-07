@@ -15,6 +15,16 @@ public class Customer
 
     }
 
+    public Customer(int customerId, string customerUserName, string customerPassword, string customerFullName, string customerPhoneNumber, string customerEmail)
+    {
+        CustomerId = customerId;
+        CustomerUserName = customerUserName;
+        CustomerPassword = customerPassword;
+        CustomerFullName = customerFullName;
+        CustomerPhoneNumber = customerPhoneNumber;
+        CustomerEmail = customerEmail;
+    }
+
     public int CustomerId { get; set; }
     public string CustomerUserName { get; set; }
     public string CustomerPassword { get; set; }
