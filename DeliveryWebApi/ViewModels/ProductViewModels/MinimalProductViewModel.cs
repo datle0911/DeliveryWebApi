@@ -2,8 +2,9 @@
 
 public class MinimalProductViewModel
 {
-    public MinimalProductViewModel(string productName, string description, double productPrice, EProductStatus productStatus)
+    public MinimalProductViewModel(int productId, string productName, string description, double productPrice, EProductStatus productStatus)
     {
+        ProductId = productId;
         ProductName = productName;
         Description = description;
         ProductPrice = productPrice;
@@ -15,6 +16,7 @@ public class MinimalProductViewModel
 
     }
 
+    public int ProductId { get; set; }
     public string ProductName { get; set; }
     public string Description { get; set; }
     public double ProductPrice { get; set; }

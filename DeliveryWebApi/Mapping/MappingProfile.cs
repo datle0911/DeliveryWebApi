@@ -30,6 +30,10 @@ public class MappingProfile : Profile
         CreateMap<Product, ProductViewModel>();
         CreateMap<ProductViewModel, Product>();
 
+        // Save Product mapped
+        CreateMap<Product, SaveProductViewModel>();
+        CreateMap<SaveProductViewModel, Product>();
+
         // Minimal Product mapped
         CreateMap<Product, MinimalProductViewModel>();
         CreateMap<MinimalProductViewModel, Product>();

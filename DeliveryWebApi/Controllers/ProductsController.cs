@@ -15,10 +15,10 @@ public class ProductsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(ProductViewModel product)
+    public async Task<IActionResult> PostAsync(SaveProductViewModel product)
     {
         // Add and Save to Database
-        var resource = _mapper.Map<ProductViewModel, Product>(product);
+        var resource = _mapper.Map<SaveProductViewModel, Product>(product);
         await _productService.AddAsync(resource);
 
         // Realtime signalR transmit
@@ -82,5 +82,19 @@ public class ProductsController : Controller
 
             return Ok(_mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products));
         }
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetProductByIdAsync(int id)
+    {
+        var product = await _productService.GetAsync(id);
+
+        if (product is null)
+        {
+            var warning = new Message(Contents.NotFoundObject + "Product");
+            return BadRequest(warning.Content);
+        }
+
+        return Ok(_mapper.Map<Product, ProductViewModel>(product));
     }
 }

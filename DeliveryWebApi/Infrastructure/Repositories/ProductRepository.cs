@@ -32,6 +32,7 @@ public class ProductRepository : BaseRepository
     {
         return await _context.Products
             .Select(p => new MinimalProductViewModel(
+                p.ProductId,
                 p.ProductName,
                 p.Description,
                 p.ProductPrice,
