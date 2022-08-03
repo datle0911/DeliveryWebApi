@@ -2,7 +2,7 @@
 
 namespace DeliveryWebApi.Infrastructure.Repositories;
 
-public class CustomerRepository : BaseRepository
+public class CustomerRepository : BaseRepository, ICustomerRepository
 {
     public CustomerRepository(DeliveryDbContext dbContext) : base(dbContext)
     {

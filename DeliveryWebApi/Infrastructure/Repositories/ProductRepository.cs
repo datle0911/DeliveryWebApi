@@ -2,15 +2,15 @@
 
 namespace DeliveryWebApi.Infrastructure.Repositories;
 
-public class ProductRepository : BaseRepository
+public class ProductRepository : BaseRepository, IProductRepository
 {
     public ProductRepository(DeliveryDbContext dbContext) : base(dbContext)
     {
     }
 
-    public void AddList(IEnumerable<Product> products)
+    public async Task AddList(IEnumerable<Product> products)
     {
-        _context.Products.AddRange(products);
+        _context.Products.AddRangeAsync(products);
     }
 
     public async Task<Product?> FindByIdAsync(int id)

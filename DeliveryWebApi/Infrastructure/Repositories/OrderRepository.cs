@@ -2,15 +2,15 @@
 
 namespace DeliveryWebApi.Infrastructure.Repositories;
 
-public class OrderRepository : BaseRepository
+public class OrderRepository : BaseRepository, IOrderRepository
 {
     public OrderRepository(DeliveryDbContext dbContext) : base(dbContext)
     {
     }
 
-    public void Add(Order order)
+    public async Task Add(Order order)
     {
-        _context.Orders.Add(order);
+        _context.Orders.AddAsync(order);
     }
 
     public void Update(Order order, JsonPatchDocument<Order> patchEntity)
@@ -62,4 +62,10 @@ public class OrderRepository : BaseRepository
 
         return resource;
     }
+
+    public Task<Order?> FindByIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
 }
