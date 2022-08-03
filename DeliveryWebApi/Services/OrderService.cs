@@ -20,7 +20,7 @@ public class OrderService
         var customer = await _customerRepository.FindByIdAsync(order.CustomerId);
         foreach(OrderDetail detail in order.Details)
         {
-            detail.Product = await _productRepository.GetAsync(detail.ProductId);
+            detail.Product = await _productRepository.FindByIdAsync(detail.ProductId);
         }
 
         order.Customer = customer;
@@ -42,12 +42,12 @@ public class OrderService
         await _unitOfWork.SaveChanges();
     }
 
-    public async Task<IEnumerable<Order>> GetOrdersAsync()
+    public async Task<IEnumerable<Order>> GetListAsync()
     {
         return await _orderRepository.GetListAsync();
     }
 
-    public async Task<IEnumerable<MinimalOrderViewModel>> GetMinimalOrdersAsync()
+    public async Task<IEnumerable<MinimalOrderViewModel>> GetMinimalListAsync()
     {
         return await _orderRepository.GetMinimalListAsync();
     }

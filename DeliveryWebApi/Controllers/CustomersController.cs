@@ -77,17 +77,17 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<CustomerViewModel>> GetAllAsync()
+    public async Task<IEnumerable<CustomerViewModel>> GetListAsync()
     {
-        var customers = await _customerService.GetAllAsync();
+        var customers = await _customerService.GetListAsync();
 
         return _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerViewModel>>(customers);
     }
 
     [HttpGet("{name}")]
-    public async Task<IEnumerable<CustomerViewModel>> GetByName(string name)
+    public async Task<IEnumerable<CustomerViewModel>> GetByFullNameAsync(string name)
     {
-        var customers = await _customerService.GetByName(name);
+        var customers = await _customerService.GetByFullNameAsync(name);
 
         return _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerViewModel>>(customers);
     }

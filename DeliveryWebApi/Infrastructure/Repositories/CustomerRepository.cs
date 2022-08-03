@@ -35,7 +35,7 @@ public class CustomerRepository : BaseRepository
         return customer;
     }
 
-    public async Task<IEnumerable<Customer>> GetAllAsync()
+    public async Task<IEnumerable<Customer>> GetListAsync()
     {
         var customers = await _context.Customers
             .AsNoTracking()

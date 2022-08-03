@@ -67,7 +67,7 @@ public class ProductsController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync([FromQuery] bool minimal)
+    public async Task<IActionResult> GetListAsync([FromQuery] bool minimal)
     {
         if(minimal == true)
         {

@@ -13,7 +13,7 @@ public class ProductRepository : BaseRepository
         _context.Products.AddRange(products);
     }
 
-    public async Task<Product?> GetAsync(int id)
+    public async Task<Product?> FindByIdAsync(int id)
     {
         var product = await _context.Products
             .FirstOrDefaultAsync(p => p.ProductId == id);
@@ -21,7 +21,7 @@ public class ProductRepository : BaseRepository
         return product;
     }
 
-    public async Task<IEnumerable<Product>> GetAllAsync()
+    public async Task<IEnumerable<Product>> GetListAsync()
     {
         return await _context.Products
             .AsNoTracking()

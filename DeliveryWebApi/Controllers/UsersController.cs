@@ -18,7 +18,7 @@ public class UsersController : Controller
     public async Task<IActionResult> PostAsync(UserViewModel user)
     {
         // Check if existed with UserName
-        var mockUser = _userService.GetByUserName(user.UserName);
+        var mockUser = _userService.GetByUserNameAsync(user.UserName);
         if (mockUser.Result is not null)
         {
             var warning = new Message(Contents.ExistedObject + "User " + user.UserName);
@@ -74,9 +74,9 @@ public class UsersController : Controller
     }
 
     [HttpGet("{name}")]
-    public async Task<IEnumerable<UserViewModel>> GetByName(string name)
+    public async Task<IEnumerable<UserViewModel>> GetByNameAsync(string name)
     {
-        var users = await _userService.GetByName(name);
+        var users = await _userService.GetByNameAsync(name);
 
         return _mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(users);
     }

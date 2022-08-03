@@ -18,7 +18,7 @@ public class UserRepository : BaseRepository
         _context.Users.Remove(user);
     }
 
-    public async Task<IEnumerable<User>> GetByName(string fullName)
+    public async Task<IEnumerable<User>> GetByNameAsync(string fullName)
     {
         var users = await _context.Users
             .Where(c => c.FullName == fullName)

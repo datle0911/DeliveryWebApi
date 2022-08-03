@@ -4,7 +4,6 @@
 [ApiController]
 public class OrdersController : Controller
 {
-
     private readonly OrderService _orderService;
     private readonly IMapper _mapper;
     private readonly IHubContext<RealtimeHub> _realtimeHub;
@@ -46,18 +45,18 @@ public class OrdersController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync([FromQuery] bool minimal)
+    public async Task<IActionResult> GetListAsync([FromQuery] bool minimal)
     {
         if(minimal is true)
         {
-            var orders = await _orderService.GetMinimalOrdersAsync();
+            var orders = await _orderService.GetMinimalListAsync();
 
             return Ok(orders);
         }
 
         else
         {
-            var orders = await _orderService.GetOrdersAsync();
+            var orders = await _orderService.GetListAsync();
 
             return Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(orders));
         }

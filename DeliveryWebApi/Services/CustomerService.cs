@@ -31,14 +31,14 @@ public class CustomerService
         await _unitOfWork.SaveChanges();
     }
 
-    public async Task<IEnumerable<Customer>> GetByName(string fullName)
+    public async Task<IEnumerable<Customer>> GetByFullNameAsync(string fullName)
     {
         return await _customerRepository.GetByName(fullName);
     }
 
-    public async Task<IEnumerable<Customer>> GetAllAsync()
+    public async Task<IEnumerable<Customer>> GetListAsync()
     {
-        return await _customerRepository.GetAllAsync();
+        return await _customerRepository.GetListAsync();
     }
 
     public async Task<Customer> FindByEmailAsync(string email)

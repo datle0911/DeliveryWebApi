@@ -19,7 +19,7 @@ public class ProductService
 
     public async Task<Product?> GetAsync(int id)
     {
-        return await _productRepository.GetAsync(id);
+        return await _productRepository.FindByIdAsync(id);
     }
     public async Task AddAsync(Product product)
     {
@@ -29,7 +29,7 @@ public class ProductService
 
     public async Task UpdateAsync(int id, JsonPatchDocument<Product> patchEntity)
     {
-        var product = _productRepository.GetAsync(id);
+        var product = _productRepository.FindByIdAsync(id);
 
         patchEntity.ApplyTo(product.Result);
         await _unitOfWork.SaveChanges();
@@ -43,7 +43,7 @@ public class ProductService
 
     public async Task<IEnumerable<Product>> GetListAsync()
     {
-        return await _productRepository.GetAllAsync();
+        return await _productRepository.GetListAsync();
     }
 
     public async Task<IEnumerable<MinimalProductViewModel>> GetMinimalListAsync()

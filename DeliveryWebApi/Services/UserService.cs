@@ -31,9 +31,9 @@ public class UserService
         await _unitOfWork.SaveChanges();
     }
 
-    public async Task<IEnumerable<User>> GetByName(string fullName)
+    public async Task<IEnumerable<User>> GetByNameAsync(string fullName)
     {
-        return await _userRepository.GetByName(fullName);
+        return await _userRepository.GetByNameAsync(fullName);
     }
 
     public async Task<IEnumerable<User>> GetListAsync()
@@ -46,7 +46,7 @@ public class UserService
         return await _userRepository.FindByMinimalAsync(user);
     }
 
-    public async Task<User?> GetByUserName(string userName)
+    public async Task<User?> GetByUserNameAsync(string userName)
     {
         return await _userRepository.FindByUserNameAsync(userName);
     }
