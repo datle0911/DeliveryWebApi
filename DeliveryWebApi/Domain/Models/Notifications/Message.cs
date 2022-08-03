@@ -1,4 +1,4 @@
-﻿namespace DeliveryWebApi.Models.Notifications;
+﻿namespace DeliveryWebApi.Domain.Models.Notifications;
 
 public class Message
 {

@@ -1,4 +1,4 @@
-﻿namespace DeliveryWebApi.Models.Enums;
+﻿namespace DeliveryWebApi.Domain.Models.Enums;
 
 public enum EOrderTracking
 {

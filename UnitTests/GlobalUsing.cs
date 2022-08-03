@@ -13,5 +13,5 @@ global using DeliveryWebApi.Hubs;
 global using DeliveryWebApi.Infrastructure.Repositories;
 global using DeliveryWebApi.Infrastructure.DbContexts;
 global using Microsoft.EntityFrameworkCore;
-global using DeliveryWebApi.Models;
-global using DeliveryWebApi.Models.Enums;
+global using DeliveryWebApi.Domain.Models;
+global using DeliveryWebApi.Domain.Models.Enums;

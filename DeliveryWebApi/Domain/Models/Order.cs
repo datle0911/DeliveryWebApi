@@ -1,4 +1,4 @@
-﻿namespace DeliveryWebApi.Models;
+﻿namespace DeliveryWebApi.Domain.Models;
 
 public class Order
 {

@@ -1,6 +1,6 @@
-﻿global using DeliveryWebApi.Models;
-global using DeliveryWebApi.Models.Enums;
-global using DeliveryWebApi.Models.Notifications;
+﻿global using DeliveryWebApi.Domain.Models;
+global using DeliveryWebApi.Domain.Models.Enums;
+global using DeliveryWebApi.Domain.Models.Notifications;
 global using DeliveryWebApi.Infrastructure.Repositories;
 global using DeliveryWebApi.Services;
 global using DeliveryWebApi.Mqtt;
