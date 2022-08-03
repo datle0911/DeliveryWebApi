@@ -13,11 +13,6 @@ public class OrderRepository : BaseRepository, IOrderRepository
         _context.Orders.AddAsync(order);
     }
 
-    public void Update(Order order, JsonPatchDocument<Order> patchEntity)
-    {
-        patchEntity.ApplyTo(order);
-    }
-
     public void Delete(Order order)
     {
         _context.Orders.Remove(order);

@@ -2,6 +2,7 @@
 
 public interface IProductService : IBaseService<Product>
 {
+    public Task UpdateAsync(int id, JsonPatchDocument<Product> patchEntity);
     public Task AddList(IEnumerable<Product> products);
     public Task<Product?> GetAsync(int id);
     public Task<IEnumerable<MinimalProductViewModel>> GetMinimalListAsync();

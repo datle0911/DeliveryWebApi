@@ -32,7 +32,7 @@ public class OrderService : IOrderService
     {
         var order = _orderRepository.FindByIdAsync(id);
 
-        _orderRepository.Update(order.Result, patchEntity);
+        patchEntity.ApplyTo(order.Result);
         await _unitOfWork.SaveChanges();
     }
 
