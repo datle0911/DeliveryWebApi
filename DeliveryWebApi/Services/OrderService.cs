@@ -1,13 +1,13 @@
 ﻿namespace DeliveryWebApi.Services;
 
-public class OrderService
+public class OrderService : IOrderService
 {
-    private readonly OrderRepository _orderRepository;
-    private readonly CustomerRepository _customerRepository;
-    private readonly ProductRepository _productRepository;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IOrderRepository _orderRepository;
+    private readonly ICustomerRepository _customerRepository;
+    private readonly IProductRepository _productRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public OrderService(OrderRepository orderRepository, CustomerRepository customerRepository, ProductRepository productRepository, UnitOfWork unitOfWork)
+    public OrderService(IOrderRepository orderRepository, ICustomerRepository customerRepository, IProductRepository productRepository, IUnitOfWork unitOfWork)
     {
         _orderRepository = orderRepository;
         _customerRepository = customerRepository;
@@ -50,5 +50,10 @@ public class OrderService
     public async Task<IEnumerable<MinimalOrderViewModel>> GetMinimalListAsync()
     {
         return await _orderRepository.GetMinimalListAsync();
+    }
+
+    public Task UpdateAsync(int id, JsonPatchDocument<Order> basePatchEntity)
+    {
+        throw new NotImplementedException();
     }
 }

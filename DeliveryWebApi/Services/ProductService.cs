@@ -1,11 +1,11 @@
 ﻿namespace DeliveryWebApi.Services;
 
-public class ProductService
+public class ProductService : IProductService
 {
-    private readonly ProductRepository _productRepository;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IProductRepository _productRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public ProductService(ProductRepository productRepository, UnitOfWork unitOfWork)
+    public ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork)
     {
         _productRepository = productRepository;
         _unitOfWork = unitOfWork;

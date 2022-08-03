@@ -34,16 +34,16 @@ builder.Services.AddSingleton<MqttClientHelper>();
 
 builder.Services.AddSignalR().AddAzureSignalR(config.GetConnectionString("SignalRConnection"));
 
-builder.Services.AddTransient<CustomerRepository>();
-builder.Services.AddTransient<ProductRepository>();
-builder.Services.AddTransient<OrderRepository>();
-builder.Services.AddTransient<UserRepository>();
-builder.Services.AddTransient<UnitOfWork>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddTransient<CustomerService>();
-builder.Services.AddTransient<ProductService>();
-builder.Services.AddTransient<OrderService>();
-builder.Services.AddTransient<UserService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddControllers().AddNewtonsoftJson();

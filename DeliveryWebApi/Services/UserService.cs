@@ -1,11 +1,11 @@
 ﻿namespace DeliveryWebApi.Services;
 
-public class UserService
+public class UserService : IUserService
 {
-    private readonly UserRepository _userRepository;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IUserRepository _userRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UserService(UserRepository userRepository, UnitOfWork unitOfWork)
+    public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork)
     {
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;

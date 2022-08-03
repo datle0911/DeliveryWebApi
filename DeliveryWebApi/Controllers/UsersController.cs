@@ -4,10 +4,10 @@
 [ApiController]
 public class UsersController : Controller
 {
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
     private readonly IMapper _mapper;
     private readonly IHubContext<RealtimeHub> _realtimeHub;
-    public UsersController(UserService userService, IMapper mapper, IHubContext<RealtimeHub> realtimeHub)
+    public UsersController(IUserService userService, IMapper mapper, IHubContext<RealtimeHub> realtimeHub)
     {
         _userService = userService;
         _mapper = mapper;

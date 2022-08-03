@@ -5,11 +5,11 @@ namespace DeliveryWebApi.Controllers;
 [ApiController]
 public class CustomersController : ControllerBase
 {
-    private readonly CustomerService _customerService;
+    private readonly ICustomerService _customerService;
     private readonly IMapper _mapper;
     private readonly IHubContext<RealtimeHub> _realtimeHub; 
 
-    public CustomersController(CustomerService customerService, IMapper mapper, IHubContext<RealtimeHub> realtimeHub)
+    public CustomersController(ICustomerService customerService, IMapper mapper, IHubContext<RealtimeHub> realtimeHub)
     {
         _customerService = customerService;
         _mapper = mapper;

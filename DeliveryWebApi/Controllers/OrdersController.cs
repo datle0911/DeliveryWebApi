@@ -4,11 +4,11 @@
 [ApiController]
 public class OrdersController : Controller
 {
-    private readonly OrderService _orderService;
+    private readonly IOrderService _orderService;
     private readonly IMapper _mapper;
     private readonly IHubContext<RealtimeHub> _realtimeHub;
 
-    public OrdersController(OrderService orderService, IMapper mapper, IHubContext<RealtimeHub> realtimeHub)
+    public OrdersController(IOrderService orderService, IMapper mapper, IHubContext<RealtimeHub> realtimeHub)
     {
         _orderService = orderService;
         _mapper = mapper;

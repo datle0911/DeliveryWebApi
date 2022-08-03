@@ -2,7 +2,7 @@
 
 namespace DeliveryWebApi.Infrastructure.Repositories;
 
-public class UnitOfWork : BaseRepository
+public class UnitOfWork : BaseRepository, IUnitOfWork
 {
     public UnitOfWork(DeliveryDbContext dbContext) : base(dbContext)
     {

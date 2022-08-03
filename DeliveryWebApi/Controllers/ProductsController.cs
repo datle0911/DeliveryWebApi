@@ -4,10 +4,10 @@
 [ApiController]
 public class ProductsController : Controller
 {
-    private readonly ProductService _productService;
+    private readonly IProductService _productService;
     private readonly IMapper _mapper;
     private readonly IHubContext<RealtimeHub> _realtimeHub;
-    public ProductsController(ProductService productService, IMapper mapper, IHubContext<RealtimeHub> realtimeHub)
+    public ProductsController(IProductService productService, IMapper mapper, IHubContext<RealtimeHub> realtimeHub)
     {
         _productService = productService;
         _mapper = mapper;

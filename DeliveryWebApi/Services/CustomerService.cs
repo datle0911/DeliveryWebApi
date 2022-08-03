@@ -1,11 +1,11 @@
 ﻿namespace DeliveryWebApi.Services;
 
-public class CustomerService
+public class CustomerService : ICustomerService
 {
-    private readonly CustomerRepository _customerRepository;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly ICustomerRepository _customerRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CustomerService(CustomerRepository customerRepository, UnitOfWork unitOfWork)
+    public CustomerService(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
     {
         _customerRepository = customerRepository;
         _unitOfWork = unitOfWork;
