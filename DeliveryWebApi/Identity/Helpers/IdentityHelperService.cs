@@ -36,8 +36,7 @@ public class IdentityHelperService : IIdentityHelper
             new Claim(ClaimTypes.Name, userNameOrEmail)
         };
 
-        var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-            _config.GetSection("Tokens:VietNam").Value));
+        var key = GetSecretKeyVietNam();
 
         var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -52,4 +51,15 @@ public class IdentityHelperService : IIdentityHelper
         return result;
     }
 
+    private SymmetricSecurityKey GetSecretKeyVietNam()
+    {
+        return new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+            _config.GetSection("Tokens:VietNam").Value));
+    }
+
+    private SymmetricSecurityKey GetSecretKeyEurope()
+    {
+        return new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+            _config.GetSection("Tokens:Europe").Value));
+    }
 }
