@@ -33,19 +33,19 @@ public class AuthController : Controller
             return BadRequest("Wrong password");
         }
 
-        var token = _identityHelperService.CreateToken(customerVm.Email);
+        var token = _identityHelperService.CreateToken(customerVm.Email, "customer");
         var result = new CustomerLoginResultVm(token, customerVm);
 
         return Ok(result);
     }
 
-    [HttpPost("login/user")]
+    [HttpPost("login/creator")]
     public async Task<IActionResult> LoginForAdmin(IdentityUserVm userVm)
     {
         var user = await _userService.GetByUserNameAsync(userVm.UserName);
         if (user is null)
         {
-            return BadRequest("Customer not found");
+            return BadRequest("Creator not found");
         }
 
         var hasing = _identityHelperService.CreatePasswordHash(user.Password);
@@ -55,7 +55,7 @@ public class AuthController : Controller
             return BadRequest("Wrong password");
         }
 
-        var token = _identityHelperService.CreateToken(userVm.UserName);
+        var token = _identityHelperService.CreateToken(userVm.UserName, user.Roles.ToString());
         var result = new UserLoginResult(token, userVm);
 
         return Ok(result);

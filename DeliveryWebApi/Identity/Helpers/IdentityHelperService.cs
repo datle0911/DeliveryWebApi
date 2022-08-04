@@ -29,14 +29,11 @@ public class IdentityHelperService : IIdentityHelper
         return computedHash.SequenceEqual(passwordHash);
     }
 
-    public TokenVm CreateToken(string userNameOrEmail)
+    public TokenVm CreateToken(string userNameOrEmail, string role)
     {
-        List<Claim> claims = new()
-        {
-            new Claim(ClaimTypes.Name, userNameOrEmail)
-        };
+        var claims = GetClaims(userNameOrEmail, role);
 
-        var key = GetSecretKeyVietNam();
+        var key = GetSecretKey();
 
         var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -51,15 +48,21 @@ public class IdentityHelperService : IIdentityHelper
         return result;
     }
 
-    private SymmetricSecurityKey GetSecretKeyVietNam()
+    private static List<Claim> GetClaims(string dynamicName, string dynamicRole)
+    {
+        List<Claim> claims = new()
+        {
+            new Claim(ClaimTypes.Name, dynamicName),
+            new Claim(ClaimTypes.Role, dynamicRole)
+        };
+
+        return claims;
+    } 
+
+    private SymmetricSecurityKey GetSecretKey()
     {
         return new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
             _config.GetSection("Tokens:VietNam").Value));
     }
 
-    private SymmetricSecurityKey GetSecretKeyEurope()
-    {
-        return new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-            _config.GetSection("Tokens:Europe").Value));
-    }
 }

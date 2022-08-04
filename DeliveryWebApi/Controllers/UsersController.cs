@@ -15,6 +15,7 @@ public class UsersController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "admin,user")]
     public async Task<IActionResult> PostAsync(UserViewModel user)
     {
         // Check if existed with UserName
@@ -38,6 +39,7 @@ public class UsersController : Controller
     }
 
     [HttpPatch("{id}")]
+    [Authorize(Roles = "admin,user")]
     public async Task<IActionResult> PatchAsync(int id, [FromBody] JsonPatchDocument<User> patchEntity)
     {
         // Update
@@ -52,6 +54,7 @@ public class UsersController : Controller
     }
 
     [HttpDelete]
+    [Authorize(Roles = "admin,user")]
     public async Task<IActionResult> DeleteAsync(MinimalUserViewModel user)
     {
         // Check if not existed
@@ -73,7 +76,17 @@ public class UsersController : Controller
         return Ok(message.Content);
     }
 
+    [HttpGet]
+    [Authorize(Roles = "admin")]
+    public async Task<IEnumerable<UserViewModel>> GetListAsync()
+    {
+        var users = await _userService.GetListAsync();
+
+        return _mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(users);
+    }
+
     [HttpGet("{name}")]
+    [Authorize(Roles = "user,admin")]
     public async Task<IEnumerable<UserViewModel>> GetByNameAsync(string name)
     {
         var users = await _userService.GetByNameAsync(name);

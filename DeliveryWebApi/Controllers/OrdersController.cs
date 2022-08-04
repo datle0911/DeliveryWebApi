@@ -16,6 +16,7 @@ public class OrdersController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "admin,user,customer")]
     public async Task<IActionResult> PostAsync(SaveOrderViewModel order)
     {
         // Add Order
@@ -31,6 +32,7 @@ public class OrdersController : Controller
     }
 
     [HttpPatch("{id}")]
+    [Authorize(Roles = "admin,user,customer")]
     public async Task<IActionResult> PatchAsync(string id, [FromBody] JsonPatchDocument<Order> patchEntity)
     {
         // Update Order
@@ -45,6 +47,7 @@ public class OrdersController : Controller
     }
 
     [HttpGet]
+    [Authorize(Roles = "admin,user")]
     public async Task<IActionResult> GetListAsync([FromQuery] bool minimal)
     {
         if(minimal is true)

@@ -16,6 +16,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "customer")]
     public async Task<IActionResult> PostAsync(CustomerViewModel customer)
     {
         // Check if existed
@@ -39,6 +40,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpPatch("{id}")]
+    [Authorize(Roles = "customer,user,admin")]
     public async Task<IActionResult> PatchAsync(int id, [FromBody] JsonPatchDocument<Customer> patchEntity)
     {
         // Update to Database
@@ -53,6 +55,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpDelete("{customerEmail}")]
+    [Authorize(Roles = "customer,user,admin")]
     public async Task<IActionResult> DeleteAsync(string customerEmail)
     {
         // Check if not existed
@@ -76,6 +79,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "user,admin")]
     public async Task<IEnumerable<CustomerViewModel>> GetListAsync()
     {
         var customers = await _customerService.GetListAsync();
@@ -84,6 +88,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet("{name}")]
+    [Authorize(Roles = "user,admin")]
     public async Task<IEnumerable<CustomerViewModel>> GetByFullNameAsync(string name)
     {
         var customers = await _customerService.GetByFullNameAsync(name);

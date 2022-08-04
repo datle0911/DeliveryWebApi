@@ -15,6 +15,7 @@ public class ProductsController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "admin,user")]
     public async Task<IActionResult> PostAsync(SaveProductViewModel product)
     {
         // Add and Save to Database
@@ -30,6 +31,7 @@ public class ProductsController : Controller
     }
 
     [HttpPatch("{id}")]
+    [Authorize(Roles = "admin,user")]
     public async Task<IActionResult> PatchAsync(int id, [FromBody] JsonPatchDocument<Product> patchEntity)
     {
         // Update Product
@@ -44,6 +46,7 @@ public class ProductsController : Controller
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "admin,user")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         // Check if not existed
