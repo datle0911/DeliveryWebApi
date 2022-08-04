@@ -24,7 +24,7 @@ public class OrderService : IOrderService
         }
 
         order.Customer = customer;
-        _orderRepository.Add(order);
+        await _orderRepository.Add(order);
         await _unitOfWork.SaveChanges();
     }
 

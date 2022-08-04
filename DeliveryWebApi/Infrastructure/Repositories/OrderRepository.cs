@@ -10,7 +10,7 @@ public class OrderRepository : BaseRepository, IOrderRepository
 
     public async Task Add(Order order)
     {
-        _context.Orders.AddAsync(order);
+        await _context.Orders.AddAsync(order);
     }
 
     public void Delete(Order order)

@@ -10,8 +10,7 @@ var config = builder.Configuration;
 
 builder.Services.AddDbContext<DeliveryDbContext>(options =>
 {
-    options.UseMySql(builder.Configuration.GetConnectionString("CloudDatabase"),
-        Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.26-mysql"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LocalSqlServer"));
 });
 
 builder.Services.AddCors(options =>
@@ -28,11 +27,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+#region Services lifetime
 builder.Services.Configure<MqttClientHelperOptions>(config.GetSection("MqttClientHelperOptions"));
 builder.Services.AddSingleton<MqttClientHelper>();
 
 builder.Services.AddSignalR().AddAzureSignalR(config.GetConnectionString("SignalRConnection"));
+
+builder.Services.AddScoped<IIdentityHelper, IdentityHelperService>();
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -44,7 +45,7 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IUserService, UserService>();
-
+#endregion
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddControllers().AddNewtonsoftJson();
 

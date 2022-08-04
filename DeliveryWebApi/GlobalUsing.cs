@@ -14,6 +14,11 @@ global using DeliveryWebApi.ViewModels.ProductViewModels;
 global using DeliveryWebApi.ViewModels.UserViewModels;
 global using DeliveryWebApi.Hubs;
 
+global using DeliveryWebApi.Identity;
+global using DeliveryWebApi.Identity.Helper;
+global using DeliveryWebApi.Identity.Model;
+global using DeliveryWebApi.Identity.ViewModel;
+
 global using AutoMapper;
 
 global using Microsoft.EntityFrameworkCore;

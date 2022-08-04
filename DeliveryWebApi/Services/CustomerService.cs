@@ -41,7 +41,7 @@ public class CustomerService : ICustomerService
         return await _customerRepository.GetListAsync();
     }
 
-    public async Task<Customer> FindByEmailAsync(string email)
+    public async Task<Customer?> FindByEmailAsync(string email)
     {
         return await _customerRepository.FindByEmailAsync(email);
     }

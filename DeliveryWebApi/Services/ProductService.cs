@@ -13,7 +13,7 @@ public class ProductService : IProductService
 
     public async Task AddList(IEnumerable<Product> products)
     {
-        _productRepository.AddList(products);
+        await _productRepository.AddList(products);
         await _unitOfWork.SaveChanges();
     }
 
