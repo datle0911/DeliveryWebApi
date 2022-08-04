@@ -1,8 +1,8 @@
-﻿namespace DeliveryWebApi.Identity.ViewModel;
+﻿namespace DeliveryWebApi.Identity.ViewModels;
 
-public class LoginResultVm
+public class UserLoginResult
 {
-    public LoginResultVm(TokenVm token, IdentityUserVm identity)
+    public UserLoginResult(TokenVm token, IdentityUserVm identity)
     {
         Token = token;
         Identity = identity;

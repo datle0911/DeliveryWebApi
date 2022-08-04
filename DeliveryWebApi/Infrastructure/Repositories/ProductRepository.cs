@@ -10,7 +10,7 @@ public class ProductRepository : BaseRepository, IProductRepository
 
     public async Task AddList(IEnumerable<Product> products)
     {
-        _context.Products.AddRangeAsync(products);
+        await _context.Products.AddRangeAsync(products);
     }
 
     public async Task<Product?> FindByIdAsync(int id)

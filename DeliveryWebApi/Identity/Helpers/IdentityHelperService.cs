@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
-namespace DeliveryWebApi.Identity.Helper;
+namespace DeliveryWebApi.Identity.Helpers;
 
 public class IdentityHelperService : IIdentityHelper
 {
@@ -29,11 +29,11 @@ public class IdentityHelperService : IIdentityHelper
         return computedHash.SequenceEqual(passwordHash);
     }
 
-    public TokenVm CreateToken(IdentityUserVm identityUserVm)
+    public TokenVm CreateToken(string userNameOrEmail)
     {
         List<Claim> claims = new()
         {
-            new Claim(ClaimTypes.Name, identityUserVm.Email)
+            new Claim(ClaimTypes.Name, userNameOrEmail)
         };
 
         var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
@@ -51,4 +51,5 @@ public class IdentityHelperService : IIdentityHelper
 
         return result;
     }
+
 }

@@ -15,9 +15,8 @@ global using DeliveryWebApi.ViewModels.UserViewModels;
 global using DeliveryWebApi.Hubs;
 
 global using DeliveryWebApi.Identity;
-global using DeliveryWebApi.Identity.Helper;
-global using DeliveryWebApi.Identity.Model;
-global using DeliveryWebApi.Identity.ViewModel;
+global using DeliveryWebApi.Identity.Helpers;
+global using DeliveryWebApi.Identity.ViewModels;
 
 global using AutoMapper;
 

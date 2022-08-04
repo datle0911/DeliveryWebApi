@@ -1,4 +1,4 @@
-﻿namespace DeliveryWebApi.Identity.ViewModel;
+﻿namespace DeliveryWebApi.Identity.ViewModels;
 
 public class TokenVm
 {

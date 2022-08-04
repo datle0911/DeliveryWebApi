@@ -1,8 +1,8 @@
-﻿namespace DeliveryWebApi.Identity.ViewModel;
+﻿namespace DeliveryWebApi.Identity.ViewModels;
 
-public class IdentityUserVm
+public class IdentityCustomerVm
 {
-    public IdentityUserVm(string email, string password)
+    public IdentityCustomerVm(string email, string password)
     {
         Email = email;
         Password = password;
